@@ -1,0 +1,113 @@
+.footer {
+  margin-top: 32px;
+  background: #232f3e;
+  font-family: "Amazon Ember", Arial, sans-serif;
+}
+
+.footer__top-btn {
+  display: block;
+  width: 100%;
+  background: #37475a;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.footer__top-btn:hover {
+  background: #485769;
+}
+
+.footer__main {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  padding: 36px 40px 24px;
+  flex-wrap: wrap;
+}
+
+.footer__col {
+  min-width: 140px;
+}
+
+.footer__col-heading {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+}
+
+.footer__col-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__link {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.15s;
+}
+.footer__link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer__divider {
+  border-top: 1px solid #3a4553;
+  margin: 0 40px;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 40px 24px;
+}
+
+.footer__logo {
+  display: flex;
+  align-items: flex-end;
+}
+.footer__logo-text {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -1px;
+}
+.footer__logo-dot {
+  color: #ff9900;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.footer__meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer__meta-link {
+  color: #ddd;
+  font-size: 12px;
+  text-decoration: none;
+}
+.footer__meta-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer__copy {
+  color: #aaa;
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+}
