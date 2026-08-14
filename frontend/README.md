@@ -1,16 +1,16 @@
 # Amazon Clone Frontend
 
-React 19 + Vite frontend application for the Amazon E-Commerce Clone.
+React 19 single-page application built with Vite and custom CSS for the Amazon E-Commerce Platform.
 
-## Features
-- **Amazon Header**: Search with dynamic categories, deliver location, live cart counter
-- **Full-Width Hero Carousel**: Auto-sliding promotional banners with custom Amazon gradient mask
-- **2x2 Category Cards Grid**: Curated category cards with thumbnail grid and quick links
-- **Product Rails**: Best Sellers, Deals, and Recommended sections with Add to Cart toast feedback
+## Architecture & Components
+- **Header**: Sticky navigation with department selector, search bar, and cart badge.
+- **HeroBanner**: Full-width promotional banner carousel with gradient blending.
+- **CategoryCard**: 2x2 multi-item thumbnail cards with responsive desktop grid.
+- **ProductSection & ProductCard**: Multi-column product rails with localized pricing, review ratings, and cart actions.
 
-## Scripts
-- `npm run dev`: Start local development server
-- `npm run build`: Build production assets
-- `npm run preview`: Preview built production app
+## Development Scripts
+- `npm run dev`: Start local development server at `http://localhost:5173`
+- `npm run build`: Compile and minify production bundle
+- `npm run preview`: Preview built production bundle locally
 
-For full documentation and backend setup, see the root [README.md](../README.md).
+Refer to the root [README.md](../README.md) for full project and backend documentation.
