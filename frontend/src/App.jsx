@@ -62,7 +62,7 @@ function App() {
       setTimeout(() => setToast(""), 2500);
     } catch (err) {
       console.error("Failed to add to cart on server:", err);
-      // Fallback local cart count update
+      // Local fallback
       setCartCount((c) => c + 1);
       setToast(`"${product.title.slice(0, 35)}..." added to cart`);
       setTimeout(() => setToast(""), 2500);
@@ -82,7 +82,7 @@ function App() {
     setSelectedCategory("All");
   };
 
-  // Derive unique product categories for pill filters and dropdown
+  // Derive unique product categories for dropdown & subnav
   const uniqueCategories = useMemo(() => {
     const fromProducts = products.map((p) => p.category).filter(Boolean);
     const categoryList = Array.from(new Set(fromProducts));
@@ -145,9 +145,13 @@ function App() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         onNavClick={(item) => {
-          if (uniqueCategories.includes(item)) {
+          if (uniqueCategories.some((c) => c.toLowerCase() === item.toLowerCase())) {
             setSelectedCategory(item);
             setActiveSearch("");
+          } else if (item.toLowerCase().includes("deals") || item.toLowerCase().includes("bestseller")) {
+            setSelectedCategory("All");
+            setSearchQuery(item);
+            handleSearch(item);
           } else {
             setSearchQuery(item);
             handleSearch(item);
@@ -156,33 +160,6 @@ function App() {
       />
 
       <main className="app__main">
-        {/* Quick Category Filter Pills Bar */}
-        <div className="category-pills-wrap">
-          <div className="category-pills">
-            <button
-              className={`category-pill ${selectedCategory === "All" && !activeSearch ? "category-pill--active" : ""}`}
-              onClick={handleClearFilter}
-            >
-              <span>🏠</span>
-              <span>All Deals</span>
-            </button>
-            {uniqueCategories.map((cat) => (
-              <button
-                key={cat}
-                className={`category-pill ${selectedCategory === cat ? "category-pill--active" : ""}`}
-                onClick={() => {
-                  setSelectedCategory(cat);
-                  setSearchQuery("");
-                  setActiveSearch("");
-                }}
-              >
-                <span>🏷️</span>
-                <span>{cat}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Loading State */}
         {isLoading && (
           <div className="state-message">

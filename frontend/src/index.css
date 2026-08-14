@@ -7,6 +7,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #eaeded;
 }
 
 body {
@@ -37,7 +38,7 @@ body {
 .category-cards-container {
   max-width: 1500px;
   width: 100%;
-  margin: -240px auto 24px;
+  margin: -260px auto 24px;
   padding: 0 20px;
   position: relative;
   z-index: 10;
@@ -78,58 +79,15 @@ body {
   }
 }
 
-/* ─── Category Pills Bar ─────────────────────────── */
-.category-pills-wrap {
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.category-pills {
-  display: flex;
-  gap: 8px;
-  padding: 10px 20px;
+/* ─── Search & Filter Results Banner ─────────────── */
+.search-results-view {
   max-width: 1500px;
   margin: 0 auto;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.category-pills::-webkit-scrollbar {
-  display: none;
+  width: 100%;
 }
 
-.category-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: #f7f8f8;
-  border: 1px solid #d5d9d9;
-  border-radius: 16px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #0f1111;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-}
-.category-pill:hover {
-  background: #ffd814;
-  border-color: #fcd200;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.category-pill--active {
-  background: #ffd814;
-  border-color: #fcd200;
-  font-weight: 700;
-}
-
-/* ─── Search & Filter Results Banner ─────────────── */
 .search-banner {
-  max-width: 1500px;
-  margin: 16px auto;
+  margin: 16px 20px;
   padding: 12px 20px;
   background: #ffffff;
   border-radius: 4px;

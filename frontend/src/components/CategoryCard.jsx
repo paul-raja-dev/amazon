@@ -21,7 +21,7 @@ const CategoryCard = ({ title, items = [], linkText = "See more", onCategoryClic
                 className="category-card__img"
                 loading="lazy"
                 onError={(e) => {
-                  e.target.src = `https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=300&auto=format&fit=crop&q=60`;
+                  e.target.src = `https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&auto=format&fit=crop&q=60`;
                 }}
               />
             </div>

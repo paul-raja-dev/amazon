@@ -4,38 +4,38 @@ import "./HeroBanner.css";
 const slides = [
   {
     id: 1,
-    title: "Starting ₹99 | All your home improvement needs",
-    subtitle: "Top Deals on Kitchen, Tools & Appliances",
-    img: "https://images-eu.ssl-images-amazon.com/images/G/31/OHL/24/GW/UNREC/PC_Hero_3000x1200_B0B._CB580005728_.jpg",
-    fallbackBg: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+    title: "Great Indian Festival | Live Now",
+    subtitle: "Up to 70% Off on Top Electronics & Gadgets",
+    img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&auto=format&fit=crop&q=85",
+    tagline: "Mega Deals on 10,000+ Products",
   },
   {
     id: 2,
-    title: "Up to 75% off | Electronics & Laptops",
-    subtitle: "Premium Laptops, Audio, Accessories & More",
-    img: "https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/laptops/Desktop/PC_hero_1500x600._CB620831096_.jpg",
-    fallbackBg: "linear-gradient(135deg, #1f4037, #99f2c8)",
+    title: "Electronics & Smart Devices Hub",
+    subtitle: "Next-gen Laptops, 4K TVs & Smart Home Gadgets",
+    img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=1600&auto=format&fit=crop&q=85",
+    tagline: "Starting ₹9,999 + Instant Bank Discounts",
   },
   {
     id: 3,
-    title: "Mega Electronics & Smartphone Deals",
-    subtitle: "Latest 5G Phones & Unbeatable Exchange Offers",
-    img: "https://images-eu.ssl-images-amazon.com/images/G/31/img24/Wireless/Samsung/SamsungBAU/MSO_May/D129631248_WLD_MSO_May_Mob_Hero_1500x600._CB558509425_.jpg",
-    fallbackBg: "linear-gradient(135deg, #2c3e50, #3498db)",
+    title: "Audio, Headphones & Wearables",
+    subtitle: "Premium ANC Headphones, Earbuds & Smartwatches",
+    img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=1600&auto=format&fit=crop&q=85",
+    tagline: "Up to 75% Off Top Brands",
   },
   {
     id: 4,
-    title: "Amazon Fashion | Up to 70% off",
-    subtitle: "Top Brands in Apparel, Footwear & Accessories",
-    img: "https://images-eu.ssl-images-amazon.com/images/G/31/img23/Softlines_RightToLeft/GW_Desktop/Hero_3000x1200_2._CB575775438_.jpg",
-    fallbackBg: "linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b)",
+    title: "Amazon Fashion Season Specials",
+    subtitle: "Apparel, Footwear, Watches & Lifestyle Deals",
+    img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&auto=format&fit=crop&q=85",
+    tagline: "50-80% Off on 500+ Top Brands",
   },
   {
     id: 5,
-    title: "Prime Video | Blockbuster Entertainment",
-    subtitle: "Stream Thousands of Movies & Award-Winning Originals",
-    img: "https://images-eu.ssl-images-amazon.com/images/G/31/Events/img24/Jupiter24/HERO/Teaser-3_1500X600._CB564883446_.jpg",
-    fallbackBg: "linear-gradient(135deg, #141e30, #243b55)",
+    title: "Home & Kitchen Essentials Store",
+    subtitle: "Cookware, Smart Appliances & Storage Solutions",
+    img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1600&auto=format&fit=crop&q=85",
+    tagline: "Starting ₹199 | Free 1-Day Prime Delivery",
   },
 ];
 
@@ -68,16 +68,18 @@ const HeroBanner = () => {
           <div
             key={slide.id}
             className={`hero-banner__slide ${index === current ? "hero-banner__slide--active" : ""}`}
-            style={{ background: slide.fallbackBg }}
           >
             <img
               src={slide.img}
               alt={slide.title}
               className="hero-banner__image"
-              onError={(e) => {
-                e.target.style.display = "none";
-              }}
+              loading={index === 0 ? "eager" : "lazy"}
             />
+            <div className="hero-banner__overlay-content">
+              <span className="hero-banner__tagline">{slide.tagline}</span>
+              <h2 className="hero-banner__title">{slide.title}</h2>
+              <p className="hero-banner__subtitle">{slide.subtitle}</p>
+            </div>
           </div>
         ))}
       </div>
