@@ -36,6 +36,12 @@ A full-stack e-commerce web application replicating the Amazon India desktop use
 - Image zoom transitions and direct category deep links.
 - Smart fallbacks and referrer handling for external CDN assets.
 
+### Shopping Cart Slide-Over Drawer
+- Real-time slide-over modal displaying added cart items.
+- Item quantity modifiers (increment, decrement, delete).
+- Automatic subtotal calculation and free delivery indicator.
+- Fully synchronized with PostgreSQL backend API.
+
 ### Product Showcase & Deals Rail
 - Product cards displaying badges (Best Seller, Amazon's Choice, Limited Deals), star ratings, review counts, localized Indian Rupee (INR) pricing, and Prime delivery tags.
 - Direct Add-to-Cart functionality with real-time feedback.
@@ -84,6 +90,8 @@ amazon/
 │           ├── HeroBanner.css
 │           ├── CategoryCard.jsx   # 2x2 grid white category cards
 │           ├── CategoryCard.css
+│           ├── CartModal.jsx      # Slide-over shopping cart modal
+│           ├── CartModal.css
 │           ├── ProductCard.jsx    # Individual product cards with price/rating
 │           ├── ProductCard.css
 │           ├── ProductSection.jsx # Horizontal product display rails
@@ -104,6 +112,7 @@ amazon/
 | `GET` | `/api/categories` | Retrieve 2x2 category cards | None | None |
 | `GET` | `/api/cart` | Get current cart items and count | None | None |
 | `POST` | `/api/cart` | Add product to shopping cart | None | `{"product_id": int}` |
+| `PUT` | `/api/cart/{id}` | Update cart item quantity | None | `{"quantity": int}` |
 | `DELETE` | `/api/cart/{id}` | Remove product from cart | None | None |
 
 ---
