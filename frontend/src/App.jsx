@@ -3,8 +3,16 @@ import Header from "./components/Header";
 import HeroBanner from "./components/HeroBanner";
 import CategoryCard from "./components/CategoryCard";
 import ProductSection from "./components/ProductSection";
+import CartModal from "./components/CartModal";
 import Footer from "./components/Footer";
-import { fetchProducts, fetchCategories, fetchCart, addToCart } from "./api";
+import {
+  fetchProducts,
+  fetchCategories,
+  fetchCart,
+  addToCart,
+  updateCartQuantity,
+  removeFromCart,
+} from "./api";
 import "./index.css";
 
 /* Mini toast notification */
@@ -14,7 +22,9 @@ const Toast = ({ message }) =>
 function App() {
   const [products, setProducts] = useState([]);
   const [categoryCards, setCategoryCards] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -30,15 +40,16 @@ function App() {
       const [productsData, categoriesData, cartData] = await Promise.all([
         fetchProducts().catch(() => []),
         fetchCategories().catch(() => []),
-        fetchCart().catch(() => ({ count: 0 })),
+        fetchCart().catch(() => ({ items: [], count: 0 })),
       ]);
 
       setProducts(productsData);
       setCategoryCards(categoriesData);
+      setCartItems(cartData.items || []);
       setCartCount(cartData.count || 0);
     } catch (err) {
       console.error("Error loading data from API:", err);
-      setError("Unable to connect to the backend server. Please ensure the API is running.");
+      setError("Unable to connect to backend server. Please ensure FastAPI is running.");
     } finally {
       setIsLoading(false);
     }
@@ -48,25 +59,61 @@ function App() {
     loadData();
   }, [loadData]);
 
+  // Sync Cart Data from Server
+  const syncCart = async () => {
+    try {
+      const cartData = await fetchCart();
+      setCartItems(cartData.items || []);
+      setCartCount(cartData.count || 0);
+    } catch (err) {
+      console.error("Error syncing cart:", err);
+    }
+  };
+
   // Handle Add to Cart
   const handleAddToCart = async (product) => {
     try {
-      const res = await addToCart(product.id);
-      if (res && res.cart) {
-        const totalItems = res.cart.reduce((sum, item) => sum + item.quantity, 0);
-        setCartCount(totalItems);
-      } else {
-        setCartCount((c) => c + 1);
-      }
+      await addToCart(product.id);
+      await syncCart();
       setToast(`"${product.title.slice(0, 35)}..." added to cart`);
       setTimeout(() => setToast(""), 2500);
     } catch (err) {
       console.error("Failed to add to cart on server:", err);
-      // Local fallback
-      setCartCount((c) => c + 1);
-      setToast(`"${product.title.slice(0, 35)}..." added to cart`);
+      setToast(`Failed to add item to cart`);
       setTimeout(() => setToast(""), 2500);
     }
+  };
+
+  // Handle Update Quantity in Cart
+  const handleUpdateQuantity = async (productId, newQuantity) => {
+    try {
+      if (newQuantity <= 0) {
+        await removeFromCart(productId);
+      } else {
+        await updateCartQuantity(productId, newQuantity);
+      }
+      await syncCart();
+    } catch (err) {
+      console.error("Failed to update quantity:", err);
+    }
+  };
+
+  // Handle Remove Item from Cart
+  const handleRemoveItem = async (productId) => {
+    try {
+      await removeFromCart(productId);
+      await syncCart();
+      setToast("Item removed from cart");
+      setTimeout(() => setToast(""), 2500);
+    } catch (err) {
+      console.error("Failed to remove item:", err);
+    }
+  };
+
+  // Handle Checkout / Proceed to Buy
+  const handleProceedToBuy = () => {
+    setToast(`Proceeding to checkout with ${cartCount} items!`);
+    setTimeout(() => setToast(""), 3500);
   };
 
   // Handle Search Submission
@@ -144,6 +191,7 @@ function App() {
         categories={uniqueCategories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        onOpenCart={() => setIsCartOpen(true)}
         onNavClick={(item) => {
           if (uniqueCategories.some((c) => c.toLowerCase() === item.toLowerCase())) {
             setSelectedCategory(item);
@@ -273,6 +321,17 @@ function App() {
       </main>
 
       <Footer />
+
+      {/* Cart Modal Slide-over */}
+      <CartModal
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        cartItems={cartItems}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
+        onProceedToBuy={handleProceedToBuy}
+      />
+
       <Toast message={toast} />
     </div>
   );

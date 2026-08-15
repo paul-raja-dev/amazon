@@ -26,6 +26,7 @@ const Header = ({
   selectedCategory = "All",
   setSelectedCategory,
   onNavClick,
+  onOpenCart,
 }) => {
   const categoryNames = categories
     .map((c) => (typeof c === "string" ? c : c.name || c.title || ""))
@@ -159,7 +160,13 @@ const Header = ({
           </div>
 
           {/* Shopping Cart */}
-          <div className="header__cart">
+          <div
+            className="header__cart"
+            onClick={() => onOpenCart && onOpenCart()}
+            role="button"
+            tabIndex={0}
+            title="Open Cart"
+          >
             <div className="cart__wrapper">
               <span className="cart__count">{cartCount}</span>
               <svg
