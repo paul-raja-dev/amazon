@@ -32,6 +32,16 @@ export async function addToCart(productId) {
   return res.json();
 }
 
+export async function updateCartQuantity(productId, quantity) {
+  const res = await fetch(`${API_BASE}/api/cart/${productId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ quantity }),
+  });
+  if (!res.ok) throw new Error("Failed to update cart quantity");
+  return res.json();
+}
+
 export async function removeFromCart(productId) {
   const res = await fetch(`${API_BASE}/api/cart/${productId}`, {
     method: "DELETE",

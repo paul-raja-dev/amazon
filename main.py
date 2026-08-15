@@ -137,6 +137,25 @@ async def add_to_cart(body: dict, db: AsyncSession = Depends(get_db)):
     return {"message": "Added to cart", "cart": cart[DEFAULT_SESSION]}
 
 
+@app.put("/api/cart/{product_id}")
+async def update_cart_quantity(product_id: int, body: dict):
+    quantity = body.get("quantity", 1)
+    if DEFAULT_SESSION not in cart:
+        raise HTTPException(status_code=404, detail="Cart is empty")
+
+    if quantity <= 0:
+        cart[DEFAULT_SESSION] = [
+            i for i in cart[DEFAULT_SESSION] if i["product_id"] != product_id
+        ]
+    else:
+        for item in cart[DEFAULT_SESSION]:
+            if item["product_id"] == product_id:
+                item["quantity"] = quantity
+                break
+
+    return {"message": "Cart updated", "cart": cart[DEFAULT_SESSION]}
+
+
 @app.delete("/api/cart/{product_id}")
 async def remove_from_cart(product_id: int):
     if DEFAULT_SESSION not in cart:
