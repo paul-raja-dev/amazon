@@ -4,31 +4,35 @@ import "./HeroBanner.css";
 const slides = [
   {
     id: 1,
+    title: "Deals on fashion & beauty",
+    subtitle: "Apparel, Shoes, Cosmetics & Accessories",
+    img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&auto=format&fit=crop&q=85",
+    tagline: "Starting ₹299",
+    bgColor: "linear-gradient(135deg, #137547 0%, #054a29 50%, #002b15 100%)",
+  },
+  {
+    id: 2,
     title: "Great Indian Festival | Live Now",
     subtitle: "Up to 70% Off on Top Electronics & Gadgets",
     img: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&auto=format&fit=crop&q=85",
     tagline: "Mega Deals on 10,000+ Products",
+    bgColor: "#131921",
   },
   {
-    id: 2,
+    id: 3,
     title: "Electronics & Smart Devices Hub",
     subtitle: "Next-gen Laptops, 4K TVs & Smart Home Gadgets",
     img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=1600&auto=format&fit=crop&q=85",
     tagline: "Starting ₹9,999 + Instant Bank Discounts",
+    bgColor: "#131921",
   },
   {
-    id: 3,
+    id: 4,
     title: "Audio, Headphones & Wearables",
     subtitle: "Premium ANC Headphones, Earbuds & Smartwatches",
     img: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=1600&auto=format&fit=crop&q=85",
     tagline: "Up to 75% Off Top Brands",
-  },
-  {
-    id: 4,
-    title: "Amazon Fashion Season Specials",
-    subtitle: "Apparel, Footwear, Watches & Lifestyle Deals",
-    img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&auto=format&fit=crop&q=85",
-    tagline: "50-80% Off on 500+ Top Brands",
+    bgColor: "#131921",
   },
   {
     id: 5,
@@ -36,6 +40,7 @@ const slides = [
     subtitle: "Cookware, Smart Appliances & Storage Solutions",
     img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=1600&auto=format&fit=crop&q=85",
     tagline: "Starting ₹199 | Free 1-Day Prime Delivery",
+    bgColor: "#131921",
   },
 ];
 
@@ -68,6 +73,7 @@ const HeroBanner = () => {
           <div
             key={slide.id}
             className={`hero-banner__slide ${index === current ? "hero-banner__slide--active" : ""}`}
+            style={{ background: slide.bgColor || "#131921" }}
           >
             <img
               src={slide.img}
